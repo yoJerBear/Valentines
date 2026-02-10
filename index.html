@@ -5,67 +5,101 @@
 <title>Be My Valentine?</title>
 
 <style>
-  body{
-    margin:0;font-family:Arial,sans-serif;text-align:center;color:#fff;
-    height:100vh;overflow:hidden;display:flex;justify-content:center;align-items:center;flex-direction:column;
-    padding:20px;box-sizing:border-box;background:linear-gradient(135deg,#ff9a9e,#fad0c4);transition:background .5s ease;
-  }
-  img{
-    width:90%;max-width:320px;border-radius:15px;margin:10px 0;
-    box-shadow:0 8px 20px rgba(0,0,0,.2);
-  }
-  button{
-    padding:15px 25px;font-size:18px;border:none;border-radius:12px;margin:10px;cursor:pointer;
-    transition:all .2s ease;-webkit-tap-highlight-color:transparent;user-select:none;
-  }
-  #yes{background:#ff3366;color:#fff}
-  #no{background:#333;color:#fff;position:relative}
-  #msg{margin-top:18px;font-size:20px;min-height:24px}
-  #details{margin-top:12px;font-size:18px;opacity:0;transition:opacity 1s ease;line-height:1.4}
-  .heart{position:absolute;pointer-events:none;animation:float 3s linear forwards}
-  @keyframes float{from{transform:translateY(0);opacity:1}to{transform:translateY(-250px);opacity:0}}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  text-align:center;
+  color:#fff;
 
-  /* Dramatic shake */
-  .shake{animation:shake .55s cubic-bezier(.36,.07,.19,.97) both}
-  @keyframes shake{
-    10%,90%{transform:translate3d(-1px,0,0)}
-    20%,80%{transform:translate3d(2px,0,0)}
-    30%,50%,70%{transform:translate3d(-4px,0,0)}
-    40%,60%{transform:translate3d(4px,0,0)}
-  }
+  min-height:100vh;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
 
-  /* Prank overlay */
-  #prank{
-    position:fixed;inset:0;background:#000;color:#fff;display:none;justify-content:center;align-items:center;
-    flex-direction:column;gap:14px;z-index:9999;text-align:center;padding:24px;box-sizing:border-box;
-  }
-  #prank .big{font-size:28px;font-weight:700}
-  #prank .small{font-size:18px;opacity:.9}
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
 
-  /* Spotify embed wrapper */
-  .music{
-    width:min(420px, 92vw);
-    margin: 12px auto 0;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow:0 8px 20px rgba(0,0,0,.18);
-  }
+  padding:20px;
+  box-sizing:border-box;
+
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  transition:background .5s ease;
+}
+
+img{
+  width:90%;
+  max-width:320px;
+  border-radius:15px;
+  margin:10px 0;
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+
+button{
+  padding:15px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:12px;
+  margin:10px;
+  cursor:pointer;
+  transition:all .2s ease;
+  user-select:none;
+}
+
+#yes{background:#ff3366;color:#fff}
+#no{background:#333;color:#fff;position:relative}
+
+#msg{margin-top:18px;font-size:20px;min-height:24px}
+#details{margin-top:12px;font-size:18px;opacity:0;transition:opacity 1s ease;line-height:1.4}
+
+.music{
+  margin-top:15px;
+  width:min(420px, 95%);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,.18);
+  display:none;
+}
+
+.shake{animation:shake .55s cubic-bezier(.36,.07,.19,.97) both}
+@keyframes shake{
+  10%,90%{transform:translate3d(-1px,0,0)}
+  20%,80%{transform:translate3d(2px,0,0)}
+  30%,50%,70%{transform:translate3d(-4px,0,0)}
+  40%,60%{transform:translate3d(4px,0,0)}
+}
+
+#prank{
+  position:fixed;
+  inset:0;
+  background:#000;
+  color:#fff;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  gap:14px;
+  z-index:9999;
+  text-align:center;
+  padding:24px;
+}
+#prank .big{font-size:28px;font-weight:700}
+#prank .small{font-size:18px;opacity:.9}
 </style>
 </head>
 
 <body>
 
 <script>
-  const PARTNER_NAME = "ANNA MORIAS BILHA TOLENTINO"; // <-- change
+const PARTNER_NAME="Jessica"; // change name
 </script>
 
 <div id="main">
   <h2>Hey <span id="name"></span>… 💘</h2>
   <p>I have something important to ask you…</p>
 
-  <!-- These files must exist in your repo root -->
-  <img src="./IMG_7903.jpeg" alt="Photo 1">
-  <img src="./IMG_7916.jpeg" alt="Photo 2">
+  <img src="./photo2.jpg" alt="Photo">
 
   <h1>Will you be my Valentine?</h1>
 
@@ -77,17 +111,18 @@
   <div id="details">
     🌹 Dinner at 7<br>
     ✨ Your favorite place<br>
-    🎵 “Lucky” on repeat<br>
+    🎵 “Lucky” playing<br>
     💕 Just us
   </div>
 
-  <!-- Spotify embed for Lucky (Jason Mraz, Colbie Caillat) -->
-  <div class="music" id="music" style="display:none;">
+  <!-- Spotify Embed -->
+  <div class="music" id="music">
     <iframe style="border-radius:12px"
-      src="https://open.spotify.com/embed/track/0IktbUcnAGrvD03AWnz3Q8"
-      width="100%" height="152" frameborder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy"></iframe>
+      src="https://open.spotify.com/embed/track/0IktbUcnAGrvD03AWnz3Q8?utm_source=generator"
+      width="100%" height="152"
+      frameborder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+    </iframe>
   </div>
 </div>
 
@@ -97,136 +132,187 @@
 </div>
 
 <script>
-  document.getElementById("name").textContent = PARTNER_NAME;
+document.getElementById("name").textContent=PARTNER_NAME;
 
-  let noCount = 0;
-  let yesScale = 1;
-  const DEFAULT_BG = "linear-gradient(135deg,#ff9a9e,#fad0c4)";
+let noCount=0;
+let yesScale=1;
+let firstTapHandled=false;
 
-  const noMessages = [
-    "Are you sure? 🥺",
-    "Really sure?? 😢",
-    "Are you absolutely sure?? 💔",
-    "This is getting dramatic… 😭",
-    "You don't mean that 😏",
-    "Okay now you're just testing me 😤",
-    "PLEASE 😭",
-    "Last chance..."
-  ];
+const noMessages=[
+"Are you sure? 🥺",
+"Really sure?? 😢",
+"Are you absolutely sure?? 💔",
+"This is getting dramatic… 😭",
+"You don't mean that 😏",
+"Okay now you're just testing me 😤",
+"PLEASE 😭",
+"Last chance..."
+];
 
-  function sayYes(){
-    document.getElementById("msg").innerHTML =
-      "YAY!!! " + PARTNER_NAME + ", I can’t wait ❤️🌹";
-    document.getElementById("details").style.opacity = 1;
-    document.getElementById("music").style.display = "block";
+/* =========================
+   Web Audio “romantic intro”
+   ========================= */
+let audioCtx=null;
+let webAudioStarted=false;
 
-    for(let i=0;i<30;i++){
-      const heart=document.createElement("div");
-      heart.className="heart";
-      heart.innerHTML=["💖","💘","💝","❤️"][Math.floor(Math.random()*4)];
-      heart.style.left=Math.random()*window.innerWidth+"px";
-      heart.style.top=window.innerHeight+"px";
-      heart.style.fontSize=(Math.random()*20+20)+"px";
-      document.body.appendChild(heart);
-      setTimeout(()=>heart.remove(),3000);
-    }
+function startWebAudioOnce(){
+  if(webAudioStarted) return;
+  webAudioStarted=true;
+
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==="suspended"){ audioCtx.resume(); }
+
+  const master=audioCtx.createGain();
+  master.gain.value=0;
+  master.connect(audioCtx.destination);
+
+  const now=audioCtx.currentTime;
+
+  // Fade in, then out
+  master.gain.setValueAtTime(0, now);
+  master.gain.linearRampToValueAtTime(0.18, now+0.6);
+  master.gain.linearRampToValueAtTime(0.0, now+6.0);
+
+  // Warm pad: detuned saw -> lowpass
+  const filter=audioCtx.createBiquadFilter();
+  filter.type="lowpass";
+  filter.frequency.setValueAtTime(900, now);
+  filter.Q.setValueAtTime(0.7, now);
+  filter.connect(master);
+
+  function playChord(freqs, t0, dur){
+    freqs.forEach((f,i)=>{
+      const o1=audioCtx.createOscillator();
+      const o2=audioCtx.createOscillator();
+      o1.type="sawtooth";
+      o2.type="sawtooth";
+      o1.frequency.setValueAtTime(f, t0);
+      o2.frequency.setValueAtTime(f, t0);
+      o1.detune.setValueAtTime(-7, t0);
+      o2.detune.setValueAtTime(7, t0);
+
+      const g=audioCtx.createGain();
+      g.gain.setValueAtTime(0.0001, t0);
+      g.gain.exponentialRampToValueAtTime(0.12/(i+1), t0+0.05);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
+
+      o1.connect(g); o2.connect(g);
+      g.connect(filter);
+
+      o1.start(t0); o2.start(t0);
+      o1.stop(t0+dur+0.05); o2.stop(t0+dur+0.05);
+    });
   }
 
-  function handleNo(){
-    const btnNo=document.getElementById("no");
-    const btnYes=document.getElementById("yes");
-    const msg=document.getElementById("msg");
+  // Generic romantic progression: C -> Am -> F -> G
+  playChord([261.63,329.63,392.00], now+0.00, 1.4);
+  playChord([220.00,261.63,329.63], now+1.45, 1.4);
+  playChord([174.61,220.00,261.63], now+2.90, 1.4);
+  playChord([196.00,246.94,293.66], now+4.35, 1.4);
 
-    noCount++;
+  // Sparkly chimes
+  function ping(freq, t){
+    const osc=audioCtx.createOscillator();
+    osc.type="sine";
+    osc.frequency.setValueAtTime(freq, t);
 
-    // shake
-    document.body.classList.remove("shake");
-    void document.body.offsetWidth;
-    document.body.classList.add("shake");
-    setTimeout(()=>document.body.classList.remove("shake"),600);
+    const g=audioCtx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.12, t+0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t+0.35);
 
-    // message
-    msg.innerHTML = noMessages[Math.min(noCount-1, noMessages.length-1)];
+    osc.connect(g);
+    g.connect(master);
 
-    // shrink no
-    let fs = 18 - (noCount*2);
-    if(fs < 8) fs = 8;
-    btnNo.style.fontSize = fs + "px";
-    let pad = 15 - noCount;
-    if(pad < 4) pad = 4;
-    btnNo.style.padding = pad + "px";
-
-    // grow yes
-    yesScale += 0.15;
-    btnYes.style.transform = "scale(" + yesScale + ")";
-
-    // move no
-    btnNo.style.position="absolute";
-    btnNo.style.left=Math.random()*(window.innerWidth-120)+"px";
-    btnNo.style.top=Math.random()*(window.innerHeight-120)+"px";
-
-    // dramatic bg
-    if(noCount>2) document.body.style.background="linear-gradient(135deg,#ff4d6d,#b3003c)";
-    if(noCount>4) document.body.style.background="linear-gradient(135deg,#cc0033,#66001a)";
-
-    // heartbreak prank at 8
-    if(noCount>=8){
-      btnNo.style.display="none";
-      heartbreakPrankThenReset();
-    }
+    osc.start(t);
+    osc.stop(t+0.4);
   }
 
-  function heartbreakPrankThenReset(){
-    const main=document.getElementById("main");
-    const prank=document.getElementById("prank");
-    const line1=document.getElementById("prankLine1");
-    const line2=document.getElementById("prankLine2");
+  [0.25,0.9,1.7,2.4,3.2,3.9,4.7,5.3].forEach((dt,idx)=>{
+    const freq=[784,659,523,988][idx%4];
+    ping(freq, now+dt);
+  });
+}
 
-    main.style.display="none";
-    prank.style.display="flex";
-    line1.textContent="You’ve broken my heart 💔";
-    line2.textContent="";
+/* =========================
+   First tap handler:
+   - starts WebAudio intro
+   - reveals Spotify embed
+   (optional) open Spotify track
+   ========================= */
+function handleFirstTap(){
+  if(firstTapHandled) return;
+  firstTapHandled=true;
 
-    setTimeout(()=>{
-      line1.textContent="Just kidding 😌";
-      line2.textContent="Try again…";
-    }, 1400);
+  // Start the instant WebAudio intro
+  startWebAudioOnce();
 
-    setTimeout(()=>resetPageState(), 2600);
+  // Reveal Spotify player
+  document.getElementById("music").style.display="block";
+
+  // OPTIONAL: open Spotify track in new tab/app on first tap (more likely to actually play)
+  // window.open("https://open.spotify.com/track/0IktbUcnAGrvD03AWnz3Q8", "_blank", "noopener,noreferrer");
+}
+
+document.addEventListener("click", handleFirstTap, { passive:true });
+document.addEventListener("touchstart", handleFirstTap, { passive:true });
+
+function sayYes(){
+  document.getElementById("msg").innerHTML=
+    "YAY!!! "+PARTNER_NAME+", I can’t wait ❤️🌹";
+  document.getElementById("details").style.opacity=1;
+  document.getElementById("music").style.display="block";
+}
+
+function handleNo(){
+  const btnNo=document.getElementById("no");
+  const btnYes=document.getElementById("yes");
+  const msg=document.getElementById("msg");
+
+  noCount++;
+
+  document.body.classList.remove("shake");
+  void document.body.offsetWidth;
+  document.body.classList.add("shake");
+  setTimeout(()=>document.body.classList.remove("shake"),600);
+
+  msg.innerHTML=noMessages[Math.min(noCount-1,noMessages.length-1)];
+
+  let fs=18-(noCount*2);
+  if(fs<8)fs=8;
+  btnNo.style.fontSize=fs+"px";
+
+  yesScale+=0.15;
+  btnYes.style.transform="scale("+yesScale+")";
+
+  btnNo.style.position="absolute";
+  btnNo.style.left=Math.random()*(window.innerWidth-120)+"px";
+  btnNo.style.top=Math.random()*(window.innerHeight-120)+"px";
+
+  if(noCount>=8){
+    btnNo.style.display="none";
+    heartbreakPrankThenReset();
   }
+}
 
-  function resetPageState(){
-    const main=document.getElementById("main");
-    const prank=document.getElementById("prank");
-    const btnNo=document.getElementById("no");
-    const btnYes=document.getElementById("yes");
-    const msg=document.getElementById("msg");
-    const details=document.getElementById("details");
-    const music=document.getElementById("music");
+function heartbreakPrankThenReset(){
+  const main=document.getElementById("main");
+  const prank=document.getElementById("prank");
+  const line1=document.getElementById("prankLine1");
+  const line2=document.getElementById("prankLine2");
 
-    noCount=0;
-    yesScale=1;
+  main.style.display="none";
+  prank.style.display="flex";
+  line1.textContent="You’ve broken my heart 💔";
+  line2.textContent="";
 
-    msg.innerHTML="";
-    details.style.opacity=0;
-    music.style.display="none";
+  setTimeout(()=>{
+    line1.textContent="Just kidding 😌";
+    line2.textContent="Try again…";
+  },1400);
 
-    document.body.style.background=DEFAULT_BG;
-
-    btnYes.style.transform="scale(1)";
-
-    btnNo.style.display="inline-block";
-    btnNo.style.position="relative";
-    btnNo.style.left="";
-    btnNo.style.top="";
-    btnNo.style.fontSize="18px";
-    btnNo.style.padding="15px 25px";
-
-    prank.style.display="none";
-    main.style.display="block";
-
-    document.querySelectorAll(".heart").forEach(h=>h.remove());
-  }
+  setTimeout(()=>location.reload(),2600);
+}
 </script>
 
 </body>
